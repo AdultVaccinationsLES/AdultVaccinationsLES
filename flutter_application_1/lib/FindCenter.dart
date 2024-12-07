@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'FAQs.dart';
-import 'main.dart'; // Importing main for the navigation to home
-import 'FindCenter.dart'; // Importing FindCenter for potential future use
+import 'main.dart';
 import 'GenInfo.dart';
+import 'package:flutter_map/flutter_map.dart';
+import 'package:latlong2/latlong.dart';
+import 'package:url_launcher/url_launcher.dart'; // Needed for URL launch in attributions.
 
 class FindCenterPage extends StatelessWidget {
   @override
@@ -54,7 +56,7 @@ class FindCenterPage extends StatelessWidget {
                   Row(
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                      // Home Button with Home Icon and "Home" Text
+                      // Home Button
                       TextButton.icon(
                         onPressed: () {
                           Navigator.push(
@@ -69,19 +71,15 @@ class FindCenterPage extends StatelessWidget {
                         ),
                       ),
                       SizedBox(width: 20),
-
                       // About Us dropdown
                       PopupMenuButton<String>(
-                        onSelected: (value) {
-                          // Handle selection
-                        },
+                        onSelected: (value) {},
                         itemBuilder: (BuildContext context) {
                           return [
                             PopupMenuItem<String>(
                               value: 'EXCITE Bridge Access Project',
                               child: Text('EXCITE Bridge Access Project'),
                             ),
-
                             PopupMenuItem<String>(
                               value: 'CDC',
                               child: Text('CDC'),
@@ -99,8 +97,7 @@ class FindCenterPage extends StatelessWidget {
                           ],
                         ),
                       ),
-                      SizedBox(width: 20), // Space between buttons
-
+                      SizedBox(width: 20),
                       // Learn More dropdown
                       PopupMenuButton<String>(
                         onSelected: (value) {
@@ -109,11 +106,6 @@ class FindCenterPage extends StatelessWidget {
                               context,
                               MaterialPageRoute(builder: (context) => GenInfoPage()),
                             );
-                          } else if (value == 'Read Our Research') {
-                            //Navigator.push(
-                              //context,
-                              //MaterialPageRoute(builder: (context) => ResearchPage()),
-                            //);
                           }
                         },
                         itemBuilder: (BuildContext context) {
@@ -121,10 +113,6 @@ class FindCenterPage extends StatelessWidget {
                             PopupMenuItem<String>(
                               value: 'Learn About Vaccines',
                               child: Text('Learn About Vaccines'),
-                            ),
-                            PopupMenuItem<String>(
-                              value: 'Read Our Research',
-                              child: Text('Read Our Research'),
                             ),
                           ];
                         },
@@ -135,17 +123,7 @@ class FindCenterPage extends StatelessWidget {
                           ],
                         ),
                       ),
-                      SizedBox(width: 20), // Space between buttons
-                      TextButton(
-                        onPressed: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(builder: (context) => FindCenterPage()),
-                          );
-                        },
-                        child: Text('Find a Vaccination Center', style: TextStyle(color: Colors.grey[800])),
-                      ),
-                      SizedBox(width: 20), // Space between buttons
+                      SizedBox(width: 20),
                       TextButton(
                         onPressed: () {
                           Navigator.push(
@@ -163,7 +141,7 @@ class FindCenterPage extends StatelessWidget {
             // Banner image below the header
             Container(
               width: double.infinity,
-              height: 300, // Adjust height as needed
+              height: 300,
               child: Image.asset(
                 'assets/images/vacc_banner_3.jpg',
                 fit: BoxFit.cover,
@@ -171,65 +149,78 @@ class FindCenterPage extends StatelessWidget {
             ),
             // Main content of the page
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 40.0, vertical: 24.0), // Wider margins
+              padding: const EdgeInsets.symmetric(horizontal: 40.0, vertical: 24.0),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget>[
-                  // Centered "About" section
                   SizedBox(height: 80.0),
                   Text(
-                    'About Finding a Vaccination Center',
+                    'Find a Vaccination Center',
                     style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                     textAlign: TextAlign.center,
                   ),
                   SizedBox(height: 20),
-
-                  // Text explaining how to find a vaccination center
                   Text(
-                    'Here you can find vaccination centers near you by entering your zip code or address.',
+                    'Enter your zip code or address to find nearby vaccination centers.',
                     style: TextStyle(fontSize: 16),
                     textAlign: TextAlign.center,
                   ),
                   SizedBox(height: 40),
-
-                  // Container to match width of the image
                   Container(
-                    width: 550, // Adjust this width to fit your content
+                    width: 550,
                     child: TextField(
                       decoration: InputDecoration(
                         border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(25.0), // Rounded edges
+                          borderRadius: BorderRadius.circular(25.0),
                         ),
                         labelText: 'Enter your zip code or address',
                         prefixIcon: Icon(Icons.search),
                       ),
                     ),
                   ),
-                  SizedBox(height: 30), 
-
-                  // Map Sample Image and Scrollable Query Results space
+                  SizedBox(height: 30),
+                  // Map with FlutterMap
                   SizedBox(
-                    height: 350, // Increased the height of the map box
-                    child: Row(
+                    height: 400,
+
+
+
+
+
+
+
+
+child: Row(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
-                        // Map Sample Image
-                        SizedBox(),
+                        // Flutter Map widget (Keep this part intact for map)
                         Expanded(
                           flex: 4,
                           child: Container(
                             width: double.infinity,
                             height: double.infinity,
-                            child: AspectRatio(
-                              aspectRatio: 1.0, // Make it a square
-                              child: Image.asset(
-                                'assets/images/map_sample.png', // Path to your sample map image
-                                fit: BoxFit.contain, // Ensure the whole image is visible
-                              ),
+                            child: FlutterMap(
+                              options: MapOptions(
+                        initialCenter: LatLng(51.509364, -0.128928), // Example coordinates
+                        initialZoom: 9.2,
+                      ),
+                      children: [
+                        TileLayer(
+                          urlTemplate: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
+                          userAgentPackageName: 'com.example.app',
+                        ),
+                        RichAttributionWidget(
+                          attributions: [
+                            TextSourceAttribution(
+                              'OpenStreetMap contributors',
+                              onTap: () => launchUrl(Uri.parse('https://openstreetmap.org/copyright')),
+                            ),
+                          ],
+                        ),
+                      ],
                             ),
                           ),
                         ),
-
 
                         // Scrollable Query Results space
                         Expanded(
@@ -271,87 +262,9 @@ class FindCenterPage extends StatelessWidget {
                               ],
                             ),
                           ),
-                          
                         ),
-                        SizedBox(width:115),
                       ],
                     ),
-                  ),
-                  SizedBox(height: 30),
-
-                ],
-              ),
-            ),
-            Container(
-              color: Color.fromARGB(255, 157, 182, 196),
-              padding: EdgeInsets.all(16.0),
-              width: double.infinity,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Image.asset(
-                        'assets/images/EXCITE_logo.png',
-                        width: 200,
-                        height: 200,
-                      ),
-                      SizedBox(width: 20),
-                      Expanded(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              'EXCITE Bridge Access Adult Vaccination Program',
-                              style: TextStyle(
-                                fontSize: 30,
-                                fontWeight: FontWeight.bold,
-                                color: const Color.fromARGB(255, 255, 255, 255),
-                              ),
-                            ),
-                            SizedBox(height: 10),
-                            Text(
-                              'The EXCITE Bridge Access program is part of a CDC initiative to provide more accessible vaccinations at various pharmacies and health clinics across the USA. '
-                              'The program aims to make vaccines accessible to everyone, regardless of their financial situation. By participating in these programs, we can help you understand and receive adult vaccinations for a healthier community. '
-                              'The EXCITE Bridge Access program is dedicated to ensuring that vaccines are within reach for all, helping to protect individuals and families from preventable diseases.',
-                              style: TextStyle(
-                                fontSize: 18,
-                                color: Colors.grey[800],
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ],
-                  ),
-                ],
-              ),
-            ),
-            // Footer
-            Container(
-              width: double.infinity,
-              color: Colors.blueGrey,
-              padding: EdgeInsets.all(16.0),
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: <Widget>[
-                  Text(
-                    '© 2024 Vaccine Info App',
-                    style: TextStyle(color: Colors.white, fontSize: 14),
-                    textAlign: TextAlign.center,
-                  ),
-                  SizedBox(height: 10),
-                  Text(
-                    'Contact Us: info@vaccineapp.com | 123-456-7890',
-                    style: TextStyle(color: Colors.white, fontSize: 14),
-                    textAlign: TextAlign.center,
-                  ),
-                  SizedBox(height: 10),
-                  Text(
-                    'Additional Information | Terms of Service | Privacy Policy',
-                    style: TextStyle(color: Colors.white, fontSize: 14),
-                    textAlign: TextAlign.center,
                   ),
                 ],
               ),
@@ -362,3 +275,6 @@ class FindCenterPage extends StatelessWidget {
     );
   }
 }
+
+
+
