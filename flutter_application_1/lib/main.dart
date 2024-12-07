@@ -28,7 +28,8 @@ class HomePage extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           children: <Widget>[
             // Header with navigation bar
-            Container(
+            Flexible(
+            child: Container(
               padding: EdgeInsets.all(16.0),
               decoration: BoxDecoration(
                 color: Colors.white, // Matches the body color
@@ -183,17 +184,28 @@ class HomePage extends StatelessWidget {
                 ],
               ),
             ),
+          ),
+
 
             // Main content
-            Padding(
+            Expanded(
+            child:Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20.0), // Adjusted padding for better responsiveness
               child: Column(
                 children: <Widget>[
+
+
                   SizedBox(height: 80.0),
+                  
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      SizedBox(width: 200.0),
+
+                      Flexible(
+                      child:SizedBox(width: 200.0),
+                      ),
+                      
+                      // Learn About Vaccinations //
                       Material(
                         color: Colors.transparent,
                         child: InkWell(
@@ -220,7 +232,7 @@ class HomePage extends StatelessWidget {
                       ),
                       SizedBox(width: 40), // Space between button and text
 
-                      Expanded(
+                      Flexible(
                         child: Column(
                           children: [
                             Text(
@@ -309,9 +321,17 @@ class HomePage extends StatelessWidget {
                       SizedBox(width: 200.0),
                     ],
                   ),
+
+
+
+
+
+
+
                   SizedBox(height: 80), // Space above the footer
                 ],
               ),
+            ),
             ),
             Container(
               color: Color.fromARGB(255, 157, 182, 196),
