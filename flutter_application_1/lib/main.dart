@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'GenInfo.dart';
 import 'FAQs.dart';
 import 'FindCenter.dart';
-import 'research.dart'; // Import ResearchPage
+import 'research.dart'; 
 
 void main() => runApp(VaccineApp());
 
