@@ -3,6 +3,7 @@ import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong2/latlong.dart';
 import 'FindCenter.dart';
 import 'FAQs.dart';
+import 'GenInfo.dart';
 import 'main.dart';
 import 'research.dart';
 import 'package:url_launcher/url_launcher.dart'; // Needed for URL launch in attributions.
@@ -13,41 +14,65 @@ class FindCenterPage extends StatefulWidget {
 }
 
 class _FindCenterPageState extends State<FindCenterPage> {
-  // Controller for the text field input (zip code)
   TextEditingController _zipController = TextEditingController();
 
-  // List of sample vaccination centers
   final List<Map<String, String>> centers = [
-    {'name': 'Sample Vaccination Center', 'address': '123 Main St, 11111', 'zip': '11111'},
-    {'name': 'Sample Pharmacy', 'address': '456 Elm St, 22222', 'zip': '22222'},
-    {'name': 'Sample Vaccination Center', 'address': '789 Oak St, 22222', 'zip': '22222'},
-    {'name': 'Sample Pharmacy', 'address': '101 Maple St, 22222', 'zip': '22222'},
-    {'name': 'Sample Vaccination Center', 'address': '202 Pine St, 11111', 'zip': '11111'},
-    {'name': 'Rite Aid Pharmacy', 'address': '1316 Mt. Hermon Rd, 21801', 'zip': '11111'},
-    {'name': 'Walgreens Pharmacy', 'address': '909 Mt Hermon Rd, 21801', 'zip': '11111'},
-    {'name': 'TidalHealth Peninsula Regional', 'address': '100 East Carroll St, 21801', 'zip': '11111'},
-    {'name': 'Wicomico County Health Department', 'address': '300 W Carroll St, 21801', 'zip': '22222'},
-    {'name': 'Your Docs In', 'address': '1135 S Salisbury Blvd, 21801', 'zip': '22222'},
+// Wicomico  
+
+{'name': 'CVS Pharmacy', 'address': '125 East North Pointe Drive, 21801', 'zip': '21801'},
+{'name': 'Omnicare Pharmacy', 'address': '119 W Naylor Mill, 21801', 'zip': '21801'},
+{'name': 'Rite Aid Pharmacy', 'address': '1316 Mt Hermon Road, 21804', 'zip': '21804'},
+{'name': 'Walgreens Pharmacy', 'address': '909 Mt Hermon Rd, 21804', 'zip': '21804'},
+{'name': 'Rite Aid Pharmacy', 'address': '1208 Parsons Rd, 21801', 'zip': '21801'},
+{'name': 'TidalHealth Peninsula Regional', 'address': '100 East Carroll St, 21801', 'zip': '21801'},
+{'name': 'Wicomico County Health Department', 'address': '300 W Carroll St, 21801', 'zip': '21801'},
+{'name': 'Your Docs In', 'address': '1135 S Salisbury Blvd, 21801', 'zip': '21801'},
+{'name': 'CVS Pharmacy', 'address': '1016 S Salisbury Blvd, 21801', 'zip': '21801'},
+{'name': 'Walgreens Pharmacy', 'address': '735 S Salisbury Blvd, 21801', 'zip': '21801'},
+{'name': 'CVS Pharmacy', 'address': '125 E N Pointe Drive, 21804', 'zip': '21804'},
+{'name': 'Mt Hermon Discount Pharmacy', 'address': '1207 Mt Hermon Rd, 21804', 'zip': '21804'},
+{'name': 'Acme Markets Pharmacy', 'address': '751 S Salisbury Blvd, 21801', 'zip': '21801'},
+{'name': 'Delmarva Pharmacy', 'address': '1615 Tree Sap Ct, 21804', 'zip': '21804'},
+{'name': 'Apple Discount Drugs', 'address': '404A N Fruitland Blvd, 21801', 'zip': '21801'},	
+{'name': 'Apple Discount Drugs', 'address': '1210 Nanticoke Rd, 21801', 'zip': '21801'},	
+{'name': 'Riverside Pharmacy', 'address': '540 Riverside Dr, 21801', 'zip': '21801'},
+{'name': 'Karemore Pharmacy', 'address': '817 Snow Hill Rd Unit 2, 21804', 'zip': '21804'},
+{'name': 'TidalHealth Peninsula Regional', 'address': '100 E Carroll St, 21801', 'zip': '21801'},
+{'name': 'Hebron Pharmacy', 'address': '100 S Main St, 21830', 'zip': '21830'},
+{'name': 'Milford Street Pharmacy', 'address': '106 Milford Street STE 401, 21804', 'zip': '21804'},
+{'name': 'Walmart Pharmacy', 'address': '409 N Fruitland Blvd, 21801', 'zip': '21801'},
+{'name': 'Pittsville Pharmacy', 'address': '34205 Old Ocean City Rd, 21850', 'zip': '21850'},
+{'name': 'Delmarva Pharmacy', 'address': '1615 Tree Sap Ct, 21804', 'zip': '21804'},
+	
+// Somerset
+
+{'name': 'Rite Aid Pharmacy', 'address': '12154 Brittingham Ln, 21853', 'zip': '21853'},
+{'name': 'Karemore Pharmacy', 'address': '12085 Somerset Ave, 21853', 'zip': '21853'},
+{'name': 'TLC Pharmacy', 'address': '12145 Elm St, 21853', 'zip': '21853'},
+{'name': 'Rite Aid Pharmacy', 'address': '505 Linden Avenue, 21851', 'zip': '21851'},
+{'name': 'Delmarva Pharmacy', 'address': '12137 Elm St, 21853', 'zip': '21853'},
+{'name': 'Rite Aid Pharmacy', 'address': '12154 Brittingham Ln, 21853', 'zip': '21853'},
+{'name': 'Crisfield Discount Pharmacy', 'address': '390 W Main Street Unit A, 21817', 'zip': '21817'},
+{'name': 'Marion Pharmacy', 'address': '26427 Burton Ave, 21817', 'zip': '21817'},
+{'name': 'Apple Discount Drugs', 'address': '404A N Fruitland Blvd, 21801', 'zip': '21801'},	
+
+
+// Worcester
+
   ];
 
-  // This will hold the filtered list of centers based on the zip code
   List<Map<String, String>> filteredCenters = [];
 
   @override
   void initState() {
     super.initState();
-    // Initially, display all centers
     filteredCenters = centers;
   }
 
-  // Function to search vaccination centers based on zip code
   void _searchCenters() {
     String zipCode = _zipController.text;
     setState(() {
-      // Filter centers based on the entered zip code
-      filteredCenters = centers
-          .where((center) => center['zip'] == zipCode)
-          .toList();
+      filteredCenters = centers.where((center) => center['zip'] == zipCode).toList();
     });
   }
 
@@ -58,11 +83,12 @@ class _FindCenterPageState extends State<FindCenterPage> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
-            // Custom header
+            // Updated Navigation Menu
             Container(
+            child: Container(
               padding: EdgeInsets.all(16.0),
               decoration: BoxDecoration(
-                color: Colors.white,
+                color: Colors.white, // Matches the body color
                 boxShadow: [
                   BoxShadow(
                     color: Colors.black.withOpacity(0.3),
@@ -71,55 +97,78 @@ class _FindCenterPageState extends State<FindCenterPage> {
                   ),
                 ],
               ),
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.end,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  // Logo image
-                  Container(
-                    alignment: Alignment.bottomLeft,
-                    child: Image.asset(
-                      'assets/images/UMES_LOGO.png',
-                      width: 80,
-                      height: 80,
-                    ),
-                  ),
-                  SizedBox(width: 10),
-                  // New EFNEP image
-                  Container(
-                    alignment: Alignment.bottomLeft,
-                    child: Image.asset(
-                      'assets/images/efnep.jpg',
-                      width: 80,
-                      height: 80,
-                    ),
-                  ),
-                  SizedBox(width: 10),
-                  Spacer(), // Pushes navigation bar to the end
-
-                  // Navigation bar aligned to the right
+                  // Header content
                   Row(
-                    mainAxisSize: MainAxisSize.min,
+                    crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
-                      // Home Button
-                      TextButton.icon(
-                        onPressed: () {
-                          // Replace HomePage() with an actual widget or route if needed.
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(builder: (context) => FindCenterPage()),
-                          );
-                        },
-                        icon: Icon(Icons.home, color: Colors.grey[800]),
-                        label: Text(
-                          'Home',
-                          style: TextStyle(color: Colors.grey[800]),
-                        ),
+
+                      SizedBox(width: 10),
+                      Spacer(), // Pushes navigation bar to the end
+
+
+
+// Navigation bar aligned to the right
+                      Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+// Home Button 
+                          TextButton.icon(
+                            onPressed: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(builder: (context) => HomePage()),
+                              );
+                            },
+                            icon: Icon(Icons.home, color: Colors.grey[800]),
+                            label: Text(
+                              'Home',
+                              style: TextStyle(color: Colors.grey[800]),
+                            ),
+                          ),
+
+                          SizedBox(width: 20), // Space
+
+// About Vaccinations
+
+                          TextButton.icon(
+                            onPressed: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(builder: (context) => GenInfoPage()),
+                              );
+                            },
+                            label: Text(
+                              'About Vaccinations',
+                              style: TextStyle(color: Colors.grey[800]),
+                            ),
+                          ),
+
+                          SizedBox(width: 20), // Space
+// Find A Center 
+                          
+                          TextButton(
+                            onPressed: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(builder: (context) => FindCenterPage()),
+                              );
+                            },
+                            child: Text('Find a Vaccination Center', style: TextStyle(color: Colors.grey[800])),
+                          ),
+                          SizedBox(width: 20), // Space
+                        ],
                       ),
                     ],
                   ),
+                  SizedBox(height: 10),
+                  // Navigation bar adjusted to the bottom
                 ],
               ),
             ),
+          ),
             // Banner image below the header
             Container(
               width: double.infinity,
@@ -129,7 +178,6 @@ class _FindCenterPageState extends State<FindCenterPage> {
                 fit: BoxFit.cover,
               ),
             ),
-            // Main content of the page
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 40.0, vertical: 24.0),
               child: Column(
@@ -163,26 +211,23 @@ class _FindCenterPageState extends State<FindCenterPage> {
                     ),
                   ),
                   SizedBox(height: 30),
-                  // Search button
                   ElevatedButton(
                     onPressed: _searchCenters,
                     child: Text('Search'),
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.blue, // Replaced primary with backgroundColor
+                      backgroundColor: Colors.blue,
                     ),
                   ),
                   SizedBox(height: 30),
-                  // Row to display map and search results side by side
                   Row(
                     children: [
-                      // Map widget (left side)
                       Expanded(
                         flex: 2,
                         child: SizedBox(
-                          height: 400, // Same height for both map and results
+                          height: 400,
                           child: FlutterMap(
                             options: MapOptions(
-                              initialCenter: LatLng(38.2297, -75.8547), // Somerset County, Maryland
+                              initialCenter: LatLng(38.2297, -75.8547),
                               initialZoom: 9.2,
                             ),
                             children: [
@@ -202,17 +247,14 @@ class _FindCenterPageState extends State<FindCenterPage> {
                           ),
                         ),
                       ),
-                      // SizedBox for some space between map and results
                       SizedBox(width: 20),
-                      // Search results widget (right side)
                       Expanded(
                         flex: 1,
                         child: SizedBox(
-                          height: 400, // Same height for both map and results
+                          height: 400,
                           child: SingleChildScrollView(
                             child: Column(
                               children: [
-                                // Display search results
                                 if (filteredCenters.isNotEmpty)
                                   Column(
                                     children: filteredCenters.map((center) {
@@ -238,8 +280,7 @@ class _FindCenterPageState extends State<FindCenterPage> {
                 ],
               ),
             ),
-            // Footer with EXCITE information
-            SizedBox(height: 80), // Space above the footer
+            SizedBox(height: 80),
             Container(
               color: Color.fromARGB(255, 157, 182, 196),
               padding: EdgeInsets.all(16.0),
@@ -271,12 +312,8 @@ class _FindCenterPageState extends State<FindCenterPage> {
                             SizedBox(height: 10),
                             Text(
                               'The EXCITE Bridge Access program is part of a CDC initiative to provide more accessible vaccinations at various pharmacies and health clinics across the USA. '
-                              'The program aims to make vaccines accessible to everyone, regardless of their financial situation. By participating in these programs, we can help you understand and receive adult vaccinations for a healthier community. '
-                              'The EXCITE Bridge Access program is dedicated to ensuring that vaccines are within reach for all, helping to protect individuals and families from preventable diseases.',
-                              style: TextStyle(
-                                fontSize: 18,
-                                color: Colors.grey[800],
-                              ),
+                              'The program aims to make vaccines accessible to everyone, regardless of their financial situation.',
+                              style: TextStyle(fontSize: 18, color: Colors.grey[800]),
                             ),
                           ],
                         ),
@@ -286,7 +323,6 @@ class _FindCenterPageState extends State<FindCenterPage> {
                 ],
               ),
             ),
-            // Footer Section for Contact and Legal Info
             Container(
               width: double.infinity,
               color: Colors.blueGrey,
@@ -295,19 +331,13 @@ class _FindCenterPageState extends State<FindCenterPage> {
                 mainAxisSize: MainAxisSize.min,
                 children: <Widget>[
                   Text(
-                    '© 2024 Vaccine Info App',
+                    '© 2024 AdultVaccinationLES',
                     style: TextStyle(color: Colors.white, fontSize: 14),
                     textAlign: TextAlign.center,
                   ),
                   SizedBox(height: 10),
                   Text(
-                    'Contact Us: info@vaccineapp.com | 123-456-7890',
-                    style: TextStyle(color: Colors.white, fontSize: 14),
-                    textAlign: TextAlign.center,
-                  ),
-                  SizedBox(height: 10),
-                  Text(
-                    'Additional Information | Terms of Service | Privacy Policy',
+                    'Contact Us: charribrooks@gmail.com',
                     style: TextStyle(color: Colors.white, fontSize: 14),
                     textAlign: TextAlign.center,
                   ),

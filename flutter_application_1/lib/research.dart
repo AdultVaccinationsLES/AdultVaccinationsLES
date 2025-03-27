@@ -34,21 +34,21 @@ class ResearchPage extends StatelessWidget {
                     // Logo image
                     Container(
                       alignment: Alignment.bottomLeft,
-                      child: Image.asset(
+                      /*child: Image.asset(
                         'assets/images/UMES_LOGO.png',
                         width: 80,
                         height: 80,
-                      ),
+                      ), */
                     ),
                     SizedBox(width: 10),
                     // New EFNEP image
                     Container(
                       alignment: Alignment.bottomLeft,
-                      child: Image.asset(
+                      /*child: Image.asset(
                         'assets/images/efnep.jpg',
                         width: 80,
                         height: 80,
-                      ),
+                      ), */
                     ),
                     SizedBox(width: 10),
                     Spacer(), // Pushes navigation bar to the end

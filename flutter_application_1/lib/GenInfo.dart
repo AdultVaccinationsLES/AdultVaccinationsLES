@@ -14,6 +14,7 @@ class GenInfoPage extends StatelessWidget {
           children: <Widget>[
             // Header with navigation bar copied from HomePage
             Container(
+            child: Container(
               padding: EdgeInsets.all(16.0),
               decoration: BoxDecoration(
                 color: Colors.white, // Matches the body color
@@ -32,33 +33,17 @@ class GenInfoPage extends StatelessWidget {
                   Row(
                     crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
-                      // Logo image
-                      Container(
-                        alignment: Alignment.bottomLeft,
-                        child: Image.asset(
-                          'assets/images/UMES_LOGO.png',
-                          width: 80,
-                          height: 80,
-                        ),
-                      ),
-                      SizedBox(width: 10),
-                      // New EFNEP image
-                      Container(
-                        alignment: Alignment.bottomLeft,
-                        child: Image.asset(
-                          'assets/images/efnep.jpg',
-                          width: 80,
-                          height: 80,
-                        ),
-                      ),
+
                       SizedBox(width: 10),
                       Spacer(), // Pushes navigation bar to the end
 
-                      // Navigation bar aligned to the right
+
+
+// Navigation bar aligned to the right
                       Row(
                         mainAxisSize: MainAxisSize.min,
                         children: [
-                          // Home Button with Home Icon and "Home" Text
+// Home Button 
                           TextButton.icon(
                             onPressed: () {
                               Navigator.push(
@@ -72,70 +57,27 @@ class GenInfoPage extends StatelessWidget {
                               style: TextStyle(color: Colors.grey[800]),
                             ),
                           ),
-                          SizedBox(width: 20),
 
-                          // About Us dropdown
-                          PopupMenuButton<String>(
-                            onSelected: (value) {
-                              // Handle selection
-                            },
-                            itemBuilder: (BuildContext context) {
-                              return [
-                                PopupMenuItem<String>(
-                                  value: 'EXCITE Bridge Access Project',
-                                  child: Text('EXCITE Bridge Access Project'),
-                                ),
-  
-                                PopupMenuItem<String>(
-                                  value: 'CDC',
-                                  child: Text('CDC'),
-                                ),
-                                PopupMenuItem<String>(
-                                  value: 'EFNEP',
-                                  child: Text('EFNEP'),
-                                ),
-                              ];
-                            },
-                            child: Row(
-                              children: [
-                                Text('About Us', style: TextStyle(color: Colors.grey[800])),
-                                Icon(Icons.arrow_drop_down, color: Colors.grey[800]),
-                              ],
-                            ),
-                          ),
-                          SizedBox(width: 20), // Space between buttons
+                          SizedBox(width: 20), // Space
 
-                          // Learn More dropdown
-                          PopupMenuButton<String>(
-                            onSelected: (value) {
-                              if (value == 'Learn About Vaccines') {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(builder: (context) => GenInfoPage()),
-                                );
-                              }
+// About Vaccinations
+
+                          TextButton.icon(
+                            onPressed: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(builder: (context) => GenInfoPage()),
+                              );
                             },
-                            itemBuilder: (BuildContext context) {
-                              return [
-                                PopupMenuItem<String>(
-                                  value: 'Learn About Vaccines',
-                                  child: Text('Learn About Vaccines'),
-                                ),
-                                PopupMenuItem<String>(
-                                  value: 'Read Our Research',
-                                  child: Text('Read Our Research'),
-                                ),
-                              ];
-                            },
-                            child: Row(
-                              children: [
-                                Text('Learn More', style: TextStyle(color: Colors.grey[800])),
-                                Icon(Icons.arrow_drop_down, color: Colors.grey[800]),
-                              ],
+                            label: Text(
+                              'About Vaccinations',
+                              style: TextStyle(color: Colors.grey[800]),
                             ),
                           ),
 
-                          SizedBox(width: 20), // Space between buttons
+                          SizedBox(width: 20), // Space
+// Find A Center 
+                          
                           TextButton(
                             onPressed: () {
                               Navigator.push(
@@ -145,24 +87,17 @@ class GenInfoPage extends StatelessWidget {
                             },
                             child: Text('Find a Vaccination Center', style: TextStyle(color: Colors.grey[800])),
                           ),
-                          SizedBox(width: 20), // Space between buttons
-                          TextButton(
-                            onPressed: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(builder: (context) => FAQsPage()),
-                              );
-                            },
-                            child: Text('FAQs', style: TextStyle(color: Colors.grey[800])),
-                          ),
+                          SizedBox(width: 20), // Space
                         ],
                       ),
                     ],
                   ),
                   SizedBox(height: 10),
+                  // Navigation bar adjusted to the bottom
                 ],
               ),
             ),
+          ),
             // Banner at the top of the body
             Container(
               width: double.infinity,
@@ -244,7 +179,7 @@ class GenInfoPage extends StatelessWidget {
                   ),
                   SizedBox(height: 40.0), // Increased spacing to fully display the image
 
-         // Title 
+                  // Title 
                   Center(
                     child: Text(
                       'Vaccinating and Population Immunity: ',
@@ -261,7 +196,7 @@ class GenInfoPage extends StatelessWidget {
                         'Population immunity happens when a large number of people in a community are immune to a disease, making it harder for the disease to spread.',
                   ),
                   SizedBox(height: 20.0),
-                                    Center(
+                  Center(
                     child: Text(
                       'How the CDC is Supporting the Vaccination Effort',
                       style: TextStyle(
@@ -279,10 +214,41 @@ class GenInfoPage extends StatelessWidget {
                   SizedBox(height: 20.0),
 
                   SizedBox(height: 40.0),
+
+                  // New Section: Discover more Vaccine, Nutrition, and Health Information!
+                  Padding(
+                    padding: const EdgeInsets.all(16.0),
+                    child: Column(
+                      children: [
+                        Text(
+                          'Discover more Vaccine, Nutrition, and Health Information!',
+                          style: TextStyle(
+                            fontSize: 24,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.grey[800],
+                          ),
+                        ),
+                        SizedBox(height: 20),
+                        Container(
+                          height: 1000, // Set height for scrolling section
+                          child: SingleChildScrollView(
+                            child: Column(
+                              children: [
+                                Image.asset('assets/images/EFNEP_infographic_front.png',
+                                ),
+                                SizedBox(height: 20),
+                                Image.asset('assets/images/EFNEP_Infographic_back.png'),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
                 ],
               ),
             ),
-    Container(
+            Container(
               color: Color.fromARGB(255, 157, 182, 196),
               padding: EdgeInsets.all(16.0),
               width: double.infinity,
@@ -337,13 +303,13 @@ class GenInfoPage extends StatelessWidget {
                 mainAxisSize: MainAxisSize.min,
                 children: <Widget>[
                   Text(
-                    '© 2024 Vaccine Info App',
+                    '© 2024 AdultVaccinationLES',
                     style: TextStyle(color: Colors.white, fontSize: 14),
                     textAlign: TextAlign.center,
                   ),
                   SizedBox(height: 10),
                   Text(
-                    'Contact Us: info@vaccineapp.com | 123-456-7890',
+                    'Contact Us: charribrooks@gmail.com',
                     style: TextStyle(color: Colors.white, fontSize: 14),
                     textAlign: TextAlign.center,
                   ),

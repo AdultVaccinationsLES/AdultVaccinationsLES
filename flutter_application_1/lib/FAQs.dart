@@ -28,21 +28,21 @@ class FAQsPage extends StatelessWidget {
               // Logo image
               Container(
                 alignment: Alignment.bottomLeft,
-                child: Image.asset(
+                /*child: Image.asset(
                   'assets/images/UMES_LOGO.png',
                   width: 80,
                   height: 80,
-                ),
+                ), */
               ),
               SizedBox(width: 10),
               // Added efnep.jpg image
               Container(
                 alignment: Alignment.bottomLeft,
-                child: Image.asset(
+                /*child: Image.asset(
                   'assets/images/efnep.jpg',
                   width: 80,
                   height: 80,
-                ),
+                ), */
               ),
               SizedBox(width: 10),
               Spacer(), // Pushes navigation bar to the end
