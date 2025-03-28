@@ -114,7 +114,14 @@ class HomePage extends StatelessWidget {
             ),
           ),
 
-
+            Container(
+              width: double.infinity,
+              height: 300, // Adjusted height for the banner
+              child: Image.asset(
+                'assets/images/MainBanner.jpg',
+                fit: BoxFit.cover,
+              ),
+            ),
 // Main content
             Expanded(
             child:Padding(
@@ -322,16 +329,12 @@ class HomePage extends StatelessWidget {
                   ),
                   SizedBox(height: 10),
                   Text(
-                    'Contact Us: charribrooks@gmail.com',
+                    'Contact Us: AdultVaccinationLES@gmail.com',
                     style: TextStyle(color: Colors.white, fontSize: 14),
                     textAlign: TextAlign.center,
                   ),
                   SizedBox(height: 10),
-                  Text(
-                    'Additional Information | Terms of Service | Privacy Policy',
-                    style: TextStyle(color: Colors.white, fontSize: 14),
-                    textAlign: TextAlign.center,
-                  ),
+
                 ],
               ),
             ),

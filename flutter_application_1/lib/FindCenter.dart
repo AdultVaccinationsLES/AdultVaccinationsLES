@@ -187,7 +187,7 @@ class _FindCenterPageState extends State<FindCenterPage> {
               width: double.infinity,
               height: 300,
               child: Image.asset(
-                'assets/images/vacc_banner_3.jpg',
+                'assets/images/FaC.jpg',
                 fit: BoxFit.cover,
               ),
             ),
@@ -349,9 +349,9 @@ class _FindCenterPageState extends State<FindCenterPage> {
                     style: TextStyle(color: Colors.white, fontSize: 14),
                     textAlign: TextAlign.center,
                   ),
-                  SizedBox(height: 10),
+                  SizedBox(height: 15),
                   Text(
-                    'Contact Us: charribrooks@gmail.com',
+                    'Contact Us: AdultVaccinationLES@gmail.com',
                     style: TextStyle(color: Colors.white, fontSize: 14),
                     textAlign: TextAlign.center,
                   ),

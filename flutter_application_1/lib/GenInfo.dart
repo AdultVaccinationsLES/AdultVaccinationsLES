@@ -103,7 +103,7 @@ class GenInfoPage extends StatelessWidget {
               width: double.infinity,
               height: 300, // Adjusted height for the banner
               child: Image.asset(
-                'assets/images/vacc_banner_2.jpg',
+                'assets/images/WtK.jpg',
                 fit: BoxFit.cover,
               ),
             ),
@@ -324,16 +324,11 @@ class GenInfoPage extends StatelessWidget {
                   ),
                   SizedBox(height: 10),
                   Text(
-                    'Contact Us: charribrooks@gmail.com',
+                    'Contact Us: AdultVaccinationLES@gmail.com',
                     style: TextStyle(color: Colors.white, fontSize: 14),
                     textAlign: TextAlign.center,
                   ),
                   SizedBox(height: 10),
-                  Text(
-                    'Additional Information | Terms of Service | Privacy Policy',
-                    style: TextStyle(color: Colors.white, fontSize: 14),
-                    textAlign: TextAlign.center,
-                  ),
                 ],
               ),
             ),
