@@ -224,7 +224,7 @@ class GenInfoPage extends StatelessWidget {
                     child: Column(
                       children: [
                         Text(
-                          'Discover more Vaccine, Nutrition, and Health Information!',
+                          'Discover More Vaccine, Nutrition, and Health Information!',
                           style: TextStyle(
                             fontSize: 35,
                             fontWeight: FontWeight.bold,
