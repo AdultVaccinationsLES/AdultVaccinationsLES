@@ -331,7 +331,8 @@ class HomePage extends StatelessWidget {
                   Text(
                     'Contact Us: AdultVaccinationLES@gmail.com',
                     style: TextStyle(color: Colors.white, fontSize: 14),
-                    textAlign: TextAlign.center,
+                    textAlign: TextAlign.center, 
+                  
                   ),
                   SizedBox(height: 10),
 
