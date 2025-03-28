@@ -241,8 +241,10 @@ Padding(
           itemCount: 2, // Number of images
           itemBuilder: (context, index) {
             List<String> images = [
-              'assets/images/EFNEP_infographic_front.png',
-              'assets/images/EFNEP_Infographic_back.png',
+              'assets/images/PopeyePowerSmoothi.jpg',
+              'assets/images/Vaccine_FS.jpg',
+              'assets/images/AppleSoda.jpg',
+              'assets/images/YogurtRanch.jpg',
             ];
             return Padding(
               padding: const EdgeInsets.all(8.0),
