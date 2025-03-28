@@ -17,6 +17,8 @@ class _FindCenterPageState extends State<FindCenterPage> {
   TextEditingController _zipController = TextEditingController();
 
   final List<Map<String, String>> centers = [
+
+
 // Wicomico  
 
 {'name': 'CVS Pharmacy', 'address': '125 East North Pointe Drive, 21801', 'zip': '21801'},
@@ -58,6 +60,17 @@ class _FindCenterPageState extends State<FindCenterPage> {
 
 
 // Worcester
+
+    {'name': 'Apple Discount Drugs - Berlin', 'address': '314 Franklin Ave, Berlin, MD', 'zip': '21811'},
+    {'name': 'Coastal Drug Pharmacy', 'address': '11005 Manklin Creek Rd Unit 1, Ocean Pines, MD', 'zip': '21811'},
+    {'name': 'Rite Aid Pharmacy', 'address': '10135 Old Ocean City Blvd, Berlin, MD', 'zip': '21811'},
+    {'name': 'Walgreens Pharmacy', 'address': '11310 Manklin Creek Rd, Berlin, MD', 'zip': '21811'},
+    {'name': 'Walmart Pharmacy', 'address': '11416 Ocean Gateway, Berlin, MD', 'zip': '21811'},
+    {'name': 'CVS Pharmacy', 'address': '12849 Ocean Gateway, Ocean City, MD', 'zip': '21842'},
+    {'name': 'CVS Pharmacy', 'address': '6400 Coastal Hwy, Ocean City, MD', 'zip': '21842'},
+    {'name': 'CVS Pharmacy', 'address': '209 N Philadelphia Ave, Ocean City, MD', 'zip': '21842'},
+    {'name': 'Snow Hill Pharmacy', 'address': '536 Worcester Hwy, Snow Hill, MD', 'zip': '21863'},
+    {'name': 'Pocomoke Pharmacy', 'address': '2 Bel Air St, Pocomoke City, MD', 'zip': '21851'},
 
   ];
 
@@ -185,13 +198,13 @@ class _FindCenterPageState extends State<FindCenterPage> {
                 children: <Widget>[
                   SizedBox(height: 80.0),
                   Text(
-                    'Find a Vaccination Center',
-                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                    'Find a Vaccination Center in Your Area.',
+                    style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
                     textAlign: TextAlign.center,
                   ),
                   SizedBox(height: 20),
                   Text(
-                    'Enter your zip code to find nearby vaccination centers.',
+                    'Enter your zip code to find nearby vaccination centers. New locations will be updated regularly.',
                     style: TextStyle(fontSize: 16),
                     textAlign: TextAlign.center,
                   ),
@@ -283,7 +296,7 @@ class _FindCenterPageState extends State<FindCenterPage> {
             SizedBox(height: 80),
             Container(
               color: Color.fromARGB(255, 157, 182, 196),
-              padding: EdgeInsets.all(16.0),
+              padding: const EdgeInsets.all(16.0),
               width: double.infinity,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
@@ -312,7 +325,8 @@ class _FindCenterPageState extends State<FindCenterPage> {
                             SizedBox(height: 10),
                             Text(
                               'The EXCITE Bridge Access program is part of a CDC initiative to provide more accessible vaccinations at various pharmacies and health clinics across the USA. '
-                              'The program aims to make vaccines accessible to everyone, regardless of their financial situation.',
+                              'The program aims to make vaccines accessible to everyone, regardless of their financial situation. By participating in these programs, we can help you understand and receive adult vaccinations for a healthier community. '
+                              'The EXCITE Bridge Access program is dedicated to ensuring that vaccines are within reach for all, helping to protect individuals and families from preventable diseases.',
                               style: TextStyle(fontSize: 18, color: Colors.grey[800]),
                             ),
                           ],

@@ -169,7 +169,8 @@ class GenInfoPage extends StatelessWidget {
                                 title: 'Why Should I Get Vaccinated?',
                                 content:
                                     'Vaccination not only protects you but also helps protect those around you, particularly vulnerable populations like infants, '
-                                    'the elderly, and those with weakened immune systems. Widespread vaccination can lead to herd immunity, reducing the spread of diseases.',
+                                    'the elderly, and those with weakened immune systems. Widespread vaccination can lead to herd immunity, reducing the spread of diseases. '
+                                    'History shows that vaccines are the safest, most effective way to protect yourself and your family from many preventable diseases.',
                               ),
                             ),
                           ],
@@ -182,7 +183,7 @@ class GenInfoPage extends StatelessWidget {
                   // Title 
                   Center(
                     child: Text(
-                      'Vaccinating and Population Immunity: ',
+                      'Getting Vaccinated is Safer than Getting Sick.',
                       style: TextStyle(
                         fontSize: 20, // Matching font size from HomePage
                         fontWeight: FontWeight.bold,
@@ -193,7 +194,10 @@ class GenInfoPage extends StatelessWidget {
                   SectionWithoutImage(
                     title: '',
                     content:
-                        'Population immunity happens when a large number of people in a community are immune to a disease, making it harder for the disease to spread.',
+                        'Vaccines help the body learn how to defend itself from disease without the dangers of a full-blown infection.' 
+                        'The immune response to a vaccine might cause tiredness and discomfort for a day or two, but the resulting protection can last a lifetime.'
+                        ''
+                        'Infections are unpredictable and can have long-term consequences. Even mild or symptom-less infections can be deadly.',
                   ),
                   SizedBox(height: 20.0),
                   Center(
@@ -215,36 +219,45 @@ class GenInfoPage extends StatelessWidget {
 
                   SizedBox(height: 40.0),
 
-                  // New Section: Discover more Vaccine, Nutrition, and Health Information!
-                  Padding(
-                    padding: const EdgeInsets.all(16.0),
-                    child: Column(
-                      children: [
-                        Text(
-                          'Discover more Vaccine, Nutrition, and Health Information!',
-                          style: TextStyle(
-                            fontSize: 24,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.grey[800],
-                          ),
-                        ),
-                        SizedBox(height: 20),
-                        Container(
-                          height: 1000, // Set height for scrolling section
-                          child: SingleChildScrollView(
-                            child: Column(
-                              children: [
-                                Image.asset('assets/images/EFNEP_infographic_front.png',
-                                ),
-                                SizedBox(height: 20),
-                                Image.asset('assets/images/EFNEP_Infographic_back.png'),
-                              ],
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
+Padding(
+  padding: const EdgeInsets.all(16.0),
+  child: Column(
+    children: [
+      Text(
+        'Discover more Vaccine, Nutrition, and Health Information!',
+        style: TextStyle(
+          fontSize: 35,
+          fontWeight: FontWeight.bold,
+          color: Colors.grey[800],
+        ),
+      ),
+      SizedBox(height: 20),
+      Container(
+        height: 400, // Set height for carousel
+        width: double.infinity, // Allow full width for scrolling
+        child: ListView.builder(
+          scrollDirection: Axis.horizontal,
+          physics: BouncingScrollPhysics(),
+          itemCount: 2, // Number of images
+          itemBuilder: (context, index) {
+            List<String> images = [
+              'assets/images/EFNEP_infographic_front.png',
+              'assets/images/EFNEP_Infographic_back.png',
+            ];
+            return Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Image.asset(
+                images[index],
+                height: 400,
+                fit: BoxFit.contain,
+              ),
+            );
+          },
+        ),
+      ),
+    ],
+  ),
+),
                 ],
               ),
             ),
