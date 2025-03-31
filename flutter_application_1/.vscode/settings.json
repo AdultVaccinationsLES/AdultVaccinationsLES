@@ -1,3 +1,4 @@
 {
-    "C_Cpp.errorSquiggles": "disabled"
+    "C_Cpp.errorSquiggles": "disabled",
+    "cmake.sourceDirectory": "C:/Users/evhit/Desktop/Vacc_App/flutter_application_1/windows/runner"
 }
