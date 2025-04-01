@@ -10,7 +10,7 @@ class VaccineApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Vaccine Info App',
+      title: 'Adult Vaccinations Lower Eastern Shore',
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
